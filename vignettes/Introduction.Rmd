@@ -1,0 +1,233 @@
+---
+title: "coefa: A R Package for Meta Analysis of Factor Analysis Based on Co-occurrence Matrices"
+author: "Xijian,Zheng & Huiyong,Fan"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Bohai University, China
+
+Email:<psydreammer@foxmail.com> to Xijian Zheng or <570950454@qq.com> to Huiyong Fan
+
+
+## **1 Introduction**
+
+Since the birth of factor analysis (proposed by Spearman), more and more studies used factor analysis as their research method, and then the number of factor loading matrices has been increasing steadily. This phenomenon can be observed in the main disciplines (e.g. psychology, management, education...) of social science.
+
+Along with the growing of such studies, the debated on the factor structure of a scale (or inner structure of a construct) is becoming popular. For example, there are several models (including a four-factor model, a five-factor model, and a seven-factor model) explaining the inner structure of the Brief Psychiatric Rating Scale (Shafer, 2005). These inconsistent models leaded to a continuing debate from 1970 to 2002 which introduced a big confusion among researchers and scale users.
+
+Shafer (2005, 2006) combined the exploratory factor analysis technique and the co-occurrence matrix generated from the factor loading matrix published widely in primary studies. Although someone once analyzed the co-occurrence matrix (Loeber & Schmaling, 1985), it is Shafer, to our knowledge, who firstly introduced the Exploratory Factor Analysis based on Co-Occurrence- matrix (can be shorted as COEFA) to synthesize the divergent factor loading matrices.
+
+Up to September,2022, there is no any open source tool to deal with the complex matrix computation of COEFA. And because of this, it is very difficult for general researchers to adopt the COEFA method in their meta-analysis. About two years ago, our team (Xijian Zheng and Huiyong Fan from Bohai University, China) planned to develop a R package to realize all computation procedures of the COEFA method. And the following sections will introduce the key steps of COEFA method. To remember them easily, this R package was named as coefa.
+
+## 2 The coefa R package
+
+### 2.1 Five steps of COEFA in coefa package
+
+#### Step1: Obtain factor loading matrices for the EFA in the original study
+
+-   *Factor loading matrix1 in original study 1*
+
+|       | F1  | F2  | F3  |
+|:-----:|:---:|:---:|:---:|
+| Item1 | 0.7 | 0.3 | 0.1 |
+| Item2 | 0.5 | 0.2 | 0.1 |
+| Item3 | 0.2 | 0.8 | 0.3 |
+| Item4 | 0.3 | 0.5 | 0.3 |
+| Item5 | 0.2 | 0.2 | 0.7 |
+| Item6 | 0.1 | 0.3 | 0.9 |
+
+-   *Factor loading matrix2 in original study 2*
+
+|       | F1  | F2  |
+|:-----:|:---:|:---:|
+| Item1 | 0.7 | 0.3 |
+| Item2 | 0.5 | 0.2 |
+| Item3 | 0.2 | 0.8 |
+| Item4 | 0.3 | 0.5 |
+| Item5 | 0.2 | 0.7 |
+| Item6 | 0.1 | 0.8 |
+
+#### Step2: Assign (Trim) the original factor loading matrices.Significant loading in factor loading matrices (loading greater than cutoff ) are assigned a value of 1, and the others are assigned a value of 0.
+
+-   *Cutoff= 0.4*
+
+-   *Trimmed factor loading matrix for original study 1*
+
+|       | F1  | F2  | F3  |
+|:-----:|:---:|:---:|:---:|
+| Item1 |  1  |  0  |  0  |
+| Item2 |  1  |  0  |  0  |
+| Item3 |  0  |  1  |  0  |
+| Item4 |  0  |  1  |  0  |
+| Item5 |  0  |  0  |  1  |
+| Item6 |  0  |  0  |  1  |
+
+-   *Trimmed factor loading matrix for original study2*
+
+|       | F1  | F2  |
+|:-----:|:---:|:---:|
+| Item1 |  1  |  0  |
+| Item2 |  1  |  0  |
+| Item3 |  0  |  1  |
+| Item4 |  0  |  1  |
+| Item5 |  0  |  1  |
+| Item6 |  0  |  1  |
+
+#### Step3: Generate co-occurrence matrices using each factor loading matrix multiply its transport.
+
+-   *Co-occurrence matrix for original study 1.*
+
+|       | Item1 | Item2 | Item3 | Item4 | Item5 | Item6 |
+|-------|-------|-------|-------|-------|-------|-------|
+| Item1 | 1     | 1     | 0     | 0     | 0     | 0     |
+| Item2 | 1     | 1     | 0     | 0     | 0     | 0     |
+| Item3 | 0     | 0     | 1     | 1     | 0     | 0     |
+| Item4 | 0     | 0     | 1     | 1     | 0     | 0     |
+| Item5 | 0     | 0     | 0     | 0     | 1     | 1     |
+| Item6 | 0     | 0     | 0     | 0     | 1     | 1     |
+
+-   *Co-occurrence matrix for original study 2*
+
+|       | Item1 | Item2 | Item3 | Item4 | Item5 | Item6 |
+|-------|-------|-------|-------|-------|-------|-------|
+| Item1 | 1     | 1     | 0     | 0     | 0     | 0     |
+| Item2 | 1     | 1     | 0     | 0     | 0     | 0     |
+| Item3 | 0     | 0     | 1     | 1     | 0     | 0     |
+| Item4 | 0     | 0     | 1     | 1     | 0     | 0     |
+| Item5 | 0     | 0     | 0     | 0     | 1     | 1     |
+| Item6 | 0     | 0     | 0     | 0     | 1     | 1     |
+
+#### Step4: Aggregate co-occurrence matrix. The users have two options,weight by sample size or not.
+
+If the sample size weighed problem is not considered:
+
+![](images/paste-44318451.png){width="69"}
+
+S: Aggregated co-occurrence matrices(Unweight)
+
+Mc: Sum of multiple co-occurrence matrices
+
+K: The numbers of include study
+
+If the sample size weighted is considered:
+
+![](images/paste-B144E67B.png){width="64"}
+
+S: Aggregated co-occurrence matrices(weight)
+
+Mc: Sum of multiple co-occurrence matrices
+
+![](images/paste-96B14E7E.png){width="23"}:The total sample size
+
+![](images/paste-6648801F.png){width="25"}:The sample size of the i-th study
+
+#### Step5: Exploratory factor analysis or principal component analysis using the Aggregated co-occurrence matrix.
+
+It should be noted here that the methods of extraction and rotation in COEFA is different from general factor analysis in some degree. First, the extraction method should use unweighted least squares (ULS) when the aggregated co-occurrence matrix is Not Positive Definite (Cao & Zhang, 2017). Second, the rotation method should be "Varimax", because the co-occurrence matrix is not correlation matrix or covariance matrix (Shafer, 2005).
+
+### 2.2 Environment of the coefa package runing.
+
+The coefa package needs the version of R 3.1.4 (R Core Team, 2022), and several packages including openxlsx (Schauberger, Walker, 2021), psych (Revelle, 2022).
+
+### 2.3 Usage of coefa package
+
+A example can be used to demonstrate that how to use the functions in the coefa package when implementing a meta-analysis of factor analysis based on co-occurrence matrices.The data is from 8 exploratory factor analysis researches of Spence Children Anxiety Scale,which was stored in the coefa package. The data can be loaded by calling library("coefa") in R.
+
+#### Step1:Obtain factor loading matrices for the EFA in the original study.
+
+We need to load the coefa package before calling the functions in the package.
+
+```{r}
+#load the library
+library(coefa)
+data("spence8")
+
+#Supposing that the data is import by coefa_read
+matrices.withoutNa<-spence8
+#Only the first two factor loading matrices of spence8 are shown here
+matrices.withoutNa[c(1,2)]
+```
+
+There are a number of ways we can get the factor loading matrix from the original study, but the coefa package provides the powerful `coefa_read` function to help you read data into R from a folder.Meanwhile the missing values in original studies will be deleted.
+
+```{r,eval=FALSE}
+#import data into R from a folder
+matrices.withoutNa<-coefa_read(type = "xlsx")
+```
+
+#### Step2: Assign (Trim) the original factor loading matrices.Significant loading in factor loading matrices (loading greater than the cutoff value ) are assigned a value of 1, and the others are assigned a value of 0.
+
+```{r,results='hide'}
+#Use the Shafer method to assign a value to the matrix of de-null values to generate a factor loading matrix after assignment
+matrices.tflm<-coefa_tflm2(matrices.withoutNa,methodE = "ls",cutoff = 0.3)
+```
+
+```{r}
+#Only the first two factor loading matrices of spence8 are shown here
+matrices.tflm[c(1,2)]
+```
+
+#### Step3: Generate the co-occurrence matrices for each primary study.
+
+```{r}
+#Generate co-occurrence matrices
+matrices.gcm<-coefa_gcm(matrices.tflm)
+#Only the first two factor loading matrices of spence8 are shown here
+matrices.gcm[c(1,2)]
+```
+
+#### Step4: Generate the aggregated co-occurrence matrix.
+
+The users have two options,weight by sample size or not.
+
+```{r}
+#Import the size of sample,sz means the sample sizes from the first study to the last study is 252,750,461,285,224,425,1520,591.
+sz<-c(252,750,461,285,224,425,1520,591)
+#Aggregate multiple co-occurrence matrices
+matrices.acm<-coefa_acm(matrices.gcm,sz,samplesized = TRUE)
+matrices.acm
+```
+
+`coefa_summary()` provides a preliminary preparation and suggestion for the later co-occurrence matrix factor analysis.Scree plot and Kaiser's criterion will be ploted by this function.
+
+```{r,eval=FALSE}
+coefa_summary(matrices.acm,fa="fa")
+```
+
+#### Step5: Exploratory factor analysis or principal component analysis Using the Aggregated co-occurrence matrix.
+
+```{r,fig.width=10,fig.height=10}
+coefa_fa(matrices.acm,nfactors = 6,methodcoefa = "EFA",rotate = "varimax",fm="uls")
+```
+
+The path diagram and cluster plot of the factor analysis are output.
+
+It should be noted that we should be alert to the positive definiteness of the aggregated matrix. If the matrix is non-positive definite, we should choose the factor extraction method carefully or we should take other solutions (remove questions appropriately, or smooth the matrix).
+
+## References
+
+Cao,Y., & Zhang, Y. (2017). Multivariate statistic methods in psychology and education. Beijing: Peking university press.158.
+
+Loeber,R., & Schmaling, K. B. (1985). Empirical evidence for overt and covert patterns of antisocial conduct problems: a metaanalysis. Journal of abnormal child psychology, 13(2), 337--353.
+
+Revelle,W. (2022) psych: Procedures for Personality and Psychological Research, Northwestern University, Evanston, Illinois, USA, <https://CRAN.Rproject.org/package=psych> Version = 2.2.5>
+
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org>.
+
+Schauberger, P. & Walker, A. (2021). openxlsx: Read, Write and Edit xlsx Files. R package version 4.2.5. <https://CRAN.R-project.org/package=openxlsx>
+
+Shafer,A. B.(2005). Meta-analysis of the Brief Psychiatric Rating Scale factor structure. Psychological Assessment, 17(3),324--335. 
+
+Shafer,A. B. (2006). Meta-analysis of the factor structures of four depression questionnaires: Beck, CES-D, Hamilton, and Zung. Journal of clinical psychology, 62(1), 123--146.
+
