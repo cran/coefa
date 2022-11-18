@@ -6,7 +6,7 @@
 The goal of `coefa` is to provide a calculation program for the method
 of Meta Analysis of Factor Analysis Based on Co-occurrence Matrices. The
 `coefa` package is an effective tools which can be used to solve the
-factor structure (i.e. inner structure of a construct, or scale)debate
+factor structure (i.e. inner structure of a construct, or scale) debate
 in several disciplines, such as psychology,
 psychiatry,management,education et al.
 
@@ -27,7 +27,7 @@ debate:
 
 First, the factor loading matrices data from a line of primary studies
 should be imported into the R environment.These data(factor loading
-matrices)should be stored using the type of list in R.This work can be
+matrices) should be stored using the type of list in R.This work can be
 executed manually or using using the `coefa_read()`function of the
 `coefa` package.
 
@@ -47,7 +47,7 @@ the miss values in data files will be replaced with the number of 0.
 matrices.withoutNa<-coefa_read(type = "xlsx")
 ```
 
-\*\*NOTE：Although the`coefa_read()` function can help you quickly read
+\*\*NOTE: Although the`coefa_read()` function can help you quickly read
 the data in the folder, there are two points should be noted: (1) The
 path of the stored file should be consistent with your workspace. (2)
 The file in the folder should have the same file formats, and different
@@ -56,9 +56,9 @@ files should be set with different parameters.
 ### Trim factor loading matrices
 
 In the step, all the factor loading matrices will be trimmed using the
-Shafer’s (2005) method or the Loeber and Schmaling’s method(1985). And
-the cutoff values (e.g., 0.3,0.4,0.5) can be given here according to the
-users’ consideration.
+Shafer’s(2005) method or the Loeber and Schmaling’s method (1985). And
+the cutoff values(e.g., 0.3, 0.4, 0.5) can be given here according to
+the users’ consideration.
 
 ``` r
 #Suppose matrices.withoutNa is obtained by coefa_read function
@@ -80,7 +80,7 @@ matrices.gcm<-coefa_gcm(matrices.tflm)
 
 ### Aggregate co-occurrence matrices
 
-In this step,aggregted co-occurrence matrix will be obtained using the
+In this step, aggregated co-occurrence matrix will be obtained using the
 `coefa_acm()` in which the aggregation algorithm will be executed. Here,
 you can set the parameter `samplesize = TURE` to add the weights to all
 studies. The sample sizes will be valued by the `sz1` variable If
@@ -108,7 +108,7 @@ coefa_summary(matrices.acm,fa="pc")
 
 ### Factor analysis
 
-Finally,the function `coefa_fa` will provide the choice for factor
+Finally, the function `coefa_fa` will provide the choice for factor
 extraction under the condition of co-occurrence matrix. The MDS, EFA,
 PCA can be a choice, and the function will generate a plot for your
 choice. A typical setting comes as follows.

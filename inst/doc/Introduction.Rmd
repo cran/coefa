@@ -17,18 +17,17 @@ knitr::opts_chunk$set(
 
 Bohai University, China
 
-Email:<psydreammer@foxmail.com> to Xijian Zheng or <570950454@qq.com> to Huiyong Fan
-
+Email:[psydreammer@foxmail.com](mailto:psydreammer@foxmail.com){.email} to Xijian Zheng or [570950454@qq.com](mailto:570950454@qq.com){.email} to Huiyong Fan
 
 ## **1 Introduction**
 
-Since the birth of factor analysis (proposed by Spearman), more and more studies used factor analysis as their research method, and then the number of factor loading matrices has been increasing steadily. This phenomenon can be observed in the main disciplines (e.g. psychology, management, education...) of social science.
+Since the birth of factor analysis (proposed by Spearman), more and more studies used factor analysis as their research method, and then the number of factor loading matrices has been increasing steadily. This phenomenon can be observed in the main disciplines (e.g. psychology, management, education... ) of social science.
 
 Along with the growing of such studies, the debated on the factor structure of a scale (or inner structure of a construct) is becoming popular. For example, there are several models (including a four-factor model, a five-factor model, and a seven-factor model) explaining the inner structure of the Brief Psychiatric Rating Scale (Shafer, 2005). These inconsistent models leaded to a continuing debate from 1970 to 2002 which introduced a big confusion among researchers and scale users.
 
 Shafer (2005, 2006) combined the exploratory factor analysis technique and the co-occurrence matrix generated from the factor loading matrix published widely in primary studies. Although someone once analyzed the co-occurrence matrix (Loeber & Schmaling, 1985), it is Shafer, to our knowledge, who firstly introduced the Exploratory Factor Analysis based on Co-Occurrence- matrix (can be shorted as COEFA) to synthesize the divergent factor loading matrices.
 
-Up to September,2022, there is no any open source tool to deal with the complex matrix computation of COEFA. And because of this, it is very difficult for general researchers to adopt the COEFA method in their meta-analysis. About two years ago, our team (Xijian Zheng and Huiyong Fan from Bohai University, China) planned to develop a R package to realize all computation procedures of the COEFA method. And the following sections will introduce the key steps of COEFA method. To remember them easily, this R package was named as coefa.
+Up to September, 2022, there is no any open source tool to deal with the complex matrix computation of COEFA. And because of this, it is very difficult for general researchers to adopt the COEFA method in their meta-analysis. About two years ago, our team (Xijian Zheng and Huiyong Fan from Bohai University, China) planned to develop a R package to realize all computation procedures of the COEFA method. And the following sections will introduce the key steps of COEFA method. To remember them easily, this R package was named as coefa.
 
 ## 2 The coefa R package
 
@@ -58,7 +57,7 @@ Up to September,2022, there is no any open source tool to deal with the complex 
 | Item5 | 0.2 | 0.7 |
 | Item6 | 0.1 | 0.8 |
 
-#### Step2: Assign (Trim) the original factor loading matrices.Significant loading in factor loading matrices (loading greater than cutoff ) are assigned a value of 1, and the others are assigned a value of 0.
+#### Step2: Assign (Trim) the original factor loading matrices. Significant loading in factor loading matrices (loading greater than cutoff ) are assigned a value of 1, and the others are assigned a value of 0.
 
 -   *Cutoff= 0.4*
 
@@ -135,6 +134,8 @@ Mc: Sum of multiple co-occurrence matrices
 #### Step5: Exploratory factor analysis or principal component analysis using the Aggregated co-occurrence matrix.
 
 It should be noted here that the methods of extraction and rotation in COEFA is different from general factor analysis in some degree. First, the extraction method should use unweighted least squares (ULS) when the aggregated co-occurrence matrix is Not Positive Definite (Cao & Zhang, 2017). Second, the rotation method should be "Varimax", because the co-occurrence matrix is not correlation matrix or covariance matrix (Shafer, 2005).
+
+There is also an optional step to fix the the value of diagonal in matrix. When Shafer's (2005; 2006) method is applied, the value of diagonal value may not equal to 1.It is difficult to done KMO and Bartlett test, and may also cause some bias. We will provide an alternative -- Replace the diagonal value of the matrix with 1 by `coefa_fixdia`. More research is needed in the future to find others reasonable alternatives.
 
 ### 2.2 Environment of the coefa package runing.
 
@@ -215,19 +216,25 @@ The path diagram and cluster plot of the factor analysis are output.
 
 It should be noted that we should be alert to the positive definiteness of the aggregated matrix. If the matrix is non-positive definite, we should choose the factor extraction method carefully or we should take other solutions (remove questions appropriately, or smooth the matrix).
 
+Note:It should be noted that co-occurrence matrices are formed in such a way that the diagonal of the matrix does not equal 1, which often makes KMO and Bartlett tests difficult to done. We offer an alternative -- `coefa_fixdia()` , which fix(replace) the diagonal.
+
+```{r,eval=FALSE}
+fixedsmatrix<-coefa_fixdia(matrices.acm,sz=100)
+```
+
 ## References
 
 Cao,Y., & Zhang, Y. (2017). Multivariate statistic methods in psychology and education. Beijing: Peking university press.158.
 
 Loeber,R., & Schmaling, K. B. (1985). Empirical evidence for overt and covert patterns of antisocial conduct problems: a metaanalysis. Journal of abnormal child psychology, 13(2), 337--353.
 
-Revelle,W. (2022) psych: Procedures for Personality and Psychological Research, Northwestern University, Evanston, Illinois, USA, <https://CRAN.Rproject.org/package=psych> Version = 2.2.5>
+Revelle, W. (2022) psych: Procedures for Personality and Psychological Research, Northwestern University, Evanston,Illinois,
+USA, https://CRAN.R-project.org/package=psych Version = 2.2.5.
 
 R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org>.
 
 Schauberger, P. & Walker, A. (2021). openxlsx: Read, Write and Edit xlsx Files. R package version 4.2.5. <https://CRAN.R-project.org/package=openxlsx>
 
-Shafer,A. B.(2005). Meta-analysis of the Brief Psychiatric Rating Scale factor structure. Psychological Assessment, 17(3),324--335. 
+Shafer,A. B.(2005). Meta-analysis of the Brief Psychiatric Rating Scale factor structure. Psychological Assessment, 17(3),324--335.
 
 Shafer,A. B. (2006). Meta-analysis of the factor structures of four depression questionnaires: Beck, CES-D, Hamilton, and Zung. Journal of clinical psychology, 62(1), 123--146.
-

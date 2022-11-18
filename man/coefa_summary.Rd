@@ -36,8 +36,8 @@ should take other solutions (remove questions appropriately, or smooth
 the matrix).
 }
 \examples{
-#summary
-coefa_summary(matrices_acm,fa="fa")
+\donttest{#summary
+coefa_summary(matrices_acm,fa="fa")}
 }
 \references{
 Cao,Y., & Zhang, Y. (2017). Multivariate statistic methods in psychology and

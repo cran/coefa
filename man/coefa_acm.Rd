@@ -4,7 +4,7 @@
 \alias{coefa_acm}
 \title{Aggregate co-occurrence matrices}
 \usage{
-coefa_acm(x,sz,samplesized =c(TRUE,FALSE))
+coefa_acm(x,sz,samplesized =c(TRUE,FALSE),raw=FALSE)
 }
 \arguments{
 \item{x}{A list containing multiple co-occurrence matrices.}
@@ -20,6 +20,10 @@ obtained by weighting the sample size. If "samplesized"=FALSE, the size of
 the sample size is not considered in the process of summarizing the
 co-occurrence matrix, that is, the co-occurrence matrix is added and divided
 by the number of matrices.}
+
+\item{raw}{A logical value.If raw=TRUE,Raw co-occurrence matrix and similarity
+matrix will be obtained. If raw=FALSE(The default value is FALSE),only similarity
+ matrix will be obtained.}
 }
 \value{
 A matrix formed by adding all the co-occurrence matrices,or adding
@@ -34,7 +38,7 @@ And the users can make their choices through the setting of corresponding
 parameters.
 }
 \examples{
-#Suppose that matrices.gcm is the co-ocurrence matrices.
+\donttest{#Suppose that matrices.gcm is the co-ocurrence matrices.
 ##Note:This is just an example.
 ##The real co-occurrence matrix should be generated from actual studies.
 mx1.tflm<-matrix(c(1,0,0,1,1,0),nrow=2,byrow=2)
@@ -45,7 +49,7 @@ matrices.gcm<-coefa_gcm(matrices.tflm)
 sz<-c(100,200)
 #Aggregate multiple co-occurrence matrices.
 matrices.acm<-coefa_acm(matrices.gcm,sz,samplesized = TRUE)
-matrices.acm
+matrices.acm}
 }
 \references{
 Shafer,A. B.(2005). Meta-analysis of the Brief Psychiatric Rating Scale

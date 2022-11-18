@@ -41,15 +41,16 @@
 #' coefa_fa(matrices_acm,nfactors=6,methodcoefa="EFA",rotate="varimax",fm="ml")
 coefa_fa<-function(R,nfactors,methodcoefa,rotate,fm){
   if(methodcoefa=="EFA"){
+
     D<-fa(r=R,nfactors = nfactors,rotate = rotate,fm=fm)
-    D
     factor.plot(D)
     psych::fa.diagram(D)
+    fa(r=R,nfactors = nfactors,rotate = rotate,fm=fm)
   }
   else if(methodcoefa=="PCA"){
     R<-principal(r=R,nfactors = nfactors,rotate = rotate)
-    R
     factor.plot(R)
     psych::fa.diagram(R)
+    principal(r=R,nfactors = nfactors,rotate = rotate)
   }
 }

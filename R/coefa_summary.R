@@ -27,8 +27,8 @@
 #' education. Beijing: Peking university press.158.
 #'
 #' @examples
-#' #summary
-#' coefa_summary(matrices_acm,fa="fa")
+#' \donttest{#summary
+#' coefa_summary(matrices_acm,fa="fa")}
 coefa_summary<-function(object,fa,omitWarning=FALSE){
   #Compute the eigenvalues of the matrix，test whether the matrix is positive definite.
   ev<-eigen(object)

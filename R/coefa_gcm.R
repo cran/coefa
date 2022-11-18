@@ -25,14 +25,14 @@
 #'  psychology, 62(1), 123--146.
 #'
 #' @examples
-#' #Suppose that the matrices.tflm is the factor loading matrices trimmed.
+#' \donttest{#Suppose that the matrices.tflm is the factor loading matrices trimmed.
 #' #Note:This is just an example.
 #' #The real co-occurrence matrix should be generated from actual studies.
 #' mx1.tflm<-matrix(c(1,0,0,1,1,0),nrow=2,byrow=2)
 #' mx2.tflm<-matrix(c(1,0,0,1),nrow=2,byrow=2)
 #' matrices.tflm<-list(mx1.tflm,mx2.tflm)
 #' #Generate co-occurrence matrices.
-#' matrices.gcm<-coefa_gcm(matrices.tflm)
+#' matrices.gcm<-coefa_gcm(matrices.tflm)}
 coefa_gcm<-function(x,...){
   #generate co-occurrence matrices
   xz<-function(x){

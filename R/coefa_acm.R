@@ -6,7 +6,7 @@
 #' co-occurrence matrix, and the weighted aggregated co-occurrence matrix.
 #' And the users can make their choices through the setting of corresponding
 #' parameters.
-#' @usage coefa_acm(x,sz,samplesized =c(TRUE,FALSE))
+#' @usage coefa_acm(x,sz,samplesized =c(TRUE,FALSE),raw=FALSE)
 #' @param x A list containing multiple co-occurrence matrices.
 #' @param sz A vector containing multiple sample sized of original study.
 #' The elements of the vector should be in the same order as the original study,
@@ -18,6 +18,9 @@
 #' the sample size is not considered in the process of summarizing the
 #' co-occurrence matrix, that is, the co-occurrence matrix is added and divided
 #' by the number of matrices.
+#' @param raw A logical value.If raw=TRUE,Raw co-occurrence matrix and similarity
+#' matrix will be obtained. If raw=FALSE(The default value is FALSE),only similarity
+#'  matrix will be obtained.
 #' @return A matrix formed by adding all the co-occurrence matrices,or adding
 #' them after weighting by sample size.
 #' @export
@@ -30,7 +33,7 @@
 #'  questionnaires: Beck, CES-D, Hamilton, and Zung. Journal of clinical
 #'  psychology, 62(1), 123--146.
 #' @examples
-#' #Suppose that matrices.gcm is the co-ocurrence matrices.
+#' \donttest{#Suppose that matrices.gcm is the co-ocurrence matrices.
 #' ##Note:This is just an example.
 #' ##The real co-occurrence matrix should be generated from actual studies.
 #' mx1.tflm<-matrix(c(1,0,0,1,1,0),nrow=2,byrow=2)
@@ -41,8 +44,8 @@
 #' sz<-c(100,200)
 #' #Aggregate multiple co-occurrence matrices.
 #' matrices.acm<-coefa_acm(matrices.gcm,sz,samplesized = TRUE)
-#' matrices.acm
-coefa_acm<-function(x,sz,samplesized=c(TRUE,FALSE)){
+#' matrices.acm}
+coefa_acm<-function(x,sz,samplesized=c(TRUE,FALSE),raw=FALSE){
   #Sample sizes for each study were multiplied by their corresponding matrices.
   if(samplesized==TRUE){
     i<-length(x)
@@ -55,11 +58,22 @@ coefa_acm<-function(x,sz,samplesized=c(TRUE,FALSE)){
     x
     acmt<-Reduce("+",x)
     acm<-acmt/sum(sz)
+    if(raw==TRUE){
+      list1<-list(acmt,acm)
+      names(list1)<-c("Raw co-occurrence matrix","Similarity matrix")
+      return(list1)
+    }
     return(acm)
   }
   else if(samplesized==FALSE){
     i<-length(x)
+    acmt<-Reduce("+",x)
     acm<-Reduce("+",x)/i
+    if(raw==TRUE){
+      list1<-list(acmt,acm)
+      names(list1)<-c("Raw co-occurrence matrix","Similarity matrix")
+      return(list1)
+    }
     return(acm)
   }
 }

@@ -2,6 +2,7 @@
 
 export(coefa_acm)
 export(coefa_fa)
+export(coefa_fixdia)
 export(coefa_gcm)
 export(coefa_read)
 export(coefa_summary)

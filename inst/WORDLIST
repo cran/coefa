@@ -15,6 +15,7 @@ Ghaderi
 Glod
 Hollocks
 Jamieson
+KMO
 Lerh
 Loeber
 MDS
@@ -58,6 +59,8 @@ csv
 doi
 equamax
 et
+fixdia
+fixedsmatrix
 fm
 geominQ
 geominT
@@ -70,6 +73,7 @@ minchi
 minrank
 minres
 nigerian
+nrow
 numeber
 oblimin
 ols
@@ -86,7 +90,9 @@ samplesized
 scas
 setwd
 simplimax
+smatrix
 spence
+sz
 tflm
 th
 uls

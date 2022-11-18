@@ -45,3 +45,6 @@ matrices.acm
 ## ----fig.width=10,fig.height=10-----------------------------------------------
 coefa_fa(matrices.acm,nfactors = 6,methodcoefa = "EFA",rotate = "varimax",fm="uls")
 
+## ----eval=FALSE---------------------------------------------------------------
+#  fixedsmatrix<-coefa_fixdia(matrices.acm,sz=100)
+
