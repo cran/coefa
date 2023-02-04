@@ -1,7 +1,7 @@
 Package: coefa
 Type: Package
 Title: Meta Analysis of Factor Analysis Based on CO-Occurrence Matrices
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(person(given = "Xijian", 
                     family = "Zheng", 
                     role = c("aut","cre"), 
@@ -23,7 +23,7 @@ RoxygenNote: 7.2.1
 Depends: openxlsx, psych, R (>= 2.10)
 Suggests: knitr, rmarkdown, spelling, testthat (>= 3.0.0)
 Imports: purrr
-Date: 2022-11-15
+Date: 2023-02-5
 Config/testthat/edition: 3
 Author: Xijian Zheng [aut, cre],
   Huiyong Fan [aut]
@@ -31,6 +31,6 @@ Maintainer: Xijian Zheng <psydreammer@foxmail.com>
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2022-11-18 06:39:42 UTC; F
+Packaged: 2023-02-04 15:56:04 UTC; F
 Repository: CRAN
-Date/Publication: 2022-11-18 08:30:02 UTC
+Date/Publication: 2023-02-04 16:12:30 UTC

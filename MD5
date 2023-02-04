@@ -1,6 +1,6 @@
-732593599e8357c57016ab98d1b56eea *DESCRIPTION
+90a56b1d30141bf8fde48fbb0e5a1e0a *DESCRIPTION
 d3cefe3269b00071f38665d8e91d326b *NAMESPACE
-950cb6e26197ab306c0dc60591105631 *NEWS.md
+b46f45495813f144b79a0031ae5a42f6 *NEWS.md
 b51a2724d25485ee0536db3b0e955570 *R/coefa-package.R
 32e68afd631185740945a6a94aca2a78 *R/coefa_acm.R
 19ab046ba485cb507ae51afa39cb6c35 *R/coefa_fa.R
@@ -14,14 +14,14 @@ a9cde825015618c9b30067a44bfb28d5 *R/matrices_acm.R
 b54700f79ca18beb856f90837b5b717f *R/spence8.R
 fe9319f5562d22f9e3bc8c80ad137317 *R/sysdata.rda
 17919f690b203c637ebf725c8deae3dd *README.md
-afbe4209b3bb961ba3e41cbfe79ea507 *build/partial.rdb
-51d24c47cb654d2ec2b3c2415731b137 *build/vignette.rds
+cb4924f3573383fca290a0a8e2ca5294 *build/partial.rdb
+7761ef634a3e18ad434950731317d42f *build/vignette.rds
 381019adc410bd6d45909c322210cde6 *data/matrices_acm.rda
 236b2f09e8a8a6f852ef44f2e5691102 *data/spence8.rda
 fd7670e221c07b9eef8f39579ffc375a *inst/WORDLIST
 d94ad58755b06a621682edadc211ff9c *inst/doc/Introduction.R
-053b6941e2ace0d0977f1f08cc4d9158 *inst/doc/Introduction.Rmd
-cc7e20c0069a9c9df14b10f74510451d *inst/doc/Introduction.html
+0932d7b3e19de75b56075c5c6dd59458 *inst/doc/Introduction.Rmd
+a7dc585d6c1b0b1c7d85eb802b02d50f *inst/doc/Introduction.html
 3fa3e96ef7adce5f008529d040358b88 *man/coefa-package.Rd
 f88ed919c2ff47afb13209c26daf6c28 *man/coefa_acm.Rd
 986eb13f6a79d67c9c7c3ade31f641c7 *man/coefa_fa.Rd
@@ -37,7 +37,7 @@ acef8b9b1cb8a52eedc677e716cd34a4 *man/matrices_acm.Rd
 332173f20d20942c02019350ea4dcadc *tests/spelling.R
 707c7df5562124e9347463f10fff7e18 *tests/testthat.R
 01b7875f6e49a14d5d1eb71359335c88 *tests/testthat/test-coefa.R
-053b6941e2ace0d0977f1f08cc4d9158 *vignettes/Introduction.Rmd
+0932d7b3e19de75b56075c5c6dd59458 *vignettes/Introduction.Rmd
 e6ab3b011cb4a5b4eb3c7cc9ca7a3bde *vignettes/images/paste-44318451.png
 946b73074111f2548e8cf4d30fb45ff1 *vignettes/images/paste-6648801F.png
 1292c39d3dacf04d7e00f5089db5299f *vignettes/images/paste-96B14E7E.png

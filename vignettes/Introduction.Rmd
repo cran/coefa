@@ -1,6 +1,6 @@
 ---
 title: "coefa: A R Package for Meta Analysis of Factor Analysis Based on Co-occurrence Matrices"
-author: "Xijian,Zheng & Huiyong,Fan"
+author: "Xijian Zheng & Huiyong Fan"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
